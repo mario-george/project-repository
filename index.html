@@ -1,0 +1,150 @@
+<html>
+<head>
+    <script type="application/x-javascript">
+    
+/*exported formValidationSetup, refreshErrorMessages */
+/*jshint unused:false*/
+   
+        /* exported validate */
+    function validate() {
+        var fname = document.getElementById("fname");
+        var lname = document.getElementById("lname");
+        var password = document.getElementById("password");
+        var cell=document.getElementById("cell");
+        if (fname.value==" ") {
+            alert("Blank First Name");
+            fname.style.border="solid red 1px";
+            document.getElementById("lblfname").style.visibility="visible";
+            return false;
+        }
+        if (lname.value==" ") {
+            alert("Blank Last name");
+            lname.style.border="solid red 1px";
+            document.getElementById("lbllname").style.visibility="visible";
+            return false;
+        }
+        if (password.value==" ") {
+            alert("Blank Password");
+            password.style.border="solid red 1px";
+            document.getElementById("lblpassword").style.visibility="visible";
+
+            return false;
+        }
+        if (rpassword.value==" ") {
+            alert("Blank Retype Password");
+            rpassword.style.border="solid red 1px";
+            document.getElementById("lblrpassword").style.visibility="visible";
+
+            return false;
+        }
+        if (password.value!=rpassword.value) {
+            alert("The Retyped password isn't the same as the first");
+            return false;
+        }
+        
+             if (password.value.trim().length<8) {
+                alert("Password too short");
+                password.style.border="solid red 1px";
+                document.getElementById("lblpassword").style.visibility="visible";
+
+                return false;
+            }
+        
+        else{
+            return second();
+            }
+    }
+    
+function second(){
+    var cell=document.getElementById("cell").value;
+    var regx=/[01][0-9]\d{9}/;
+    
+    if (regx.test(cell)) {
+        document.getElementById("lblcell").innerHTML="valid";
+        document.getElementById("lblcell").style.visibility="visible";
+        document.getElementById("lblcell").style.color="green";
+        
+        return third();
+    }
+    else{
+        document.getElementById("lblcell").innerHTML="invalid";
+        document.getElementById("lblcell").style.visibility="visible";
+        document.getElementById("lblcell").style.color="red";
+        alert("Type the cellphone number in the right format 01 followed by 9 digits");
+        return false;
+        
+    }
+    
+}
+function third() {
+    var regx=/^([a-z 0-9\.-]+)@([a-z0-9-]+).([a-z]{2,8})(.[a-z]{2,8})?$/;
+    var email=document.getElementById("email").value;
+
+    if (regx.test(email)) {
+        document.getElementById("lblemail").innerHTML="valid";
+        document.getElementById("lblemail").style.visibility="visible";
+        document.getElementById("lblemail").style.color="green";
+        return true;
+    }
+    else{
+        document.getElementById("lblemail").innerHTML="invalid";
+        document.getElementById("lblemail").style.visibility="visible";
+        document.getElementById("lblemail").style.color="red";
+        alert("Type the email in the right format");
+        return false;
+    }
+
+
+    
+
+}
+    
+    
+    </script>
+<title> Registration form </title>   
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <div id="login-box">
+      <div class="left-box">
+        <h1> Sign Up</h1>
+          <form onsubmit="return validate();" action="project.html">
+          <input type="text" id="fname" placeholder="First Name" required/><br>
+            <label id="lblfname" style="color:red;visibility:hidden;">Invalid</label><br>
+                        <input type="text" id="lname" placeholder="Last Name" required/><br>
+            <label id="lbllname" style="color:red;visibility:hidden;">Invalid</label><br>
+            <input type="text" id="cell" placeholder="Cellphone" required/><br>
+            <label id="lblcell" style="color:red;visibility:hidden;">Invalid</label><br>
+            <input type="email" placeholder="Email" id="email" required/><br>
+            <label id="lblemail" style="color:red;visibility:hidden;">invalid</label><br>
+            <label id="lblpassword" style="color:red;visibility:hidden;">Invalid</label><br>
+
+            <input type="password" placeholder="Password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/><br>
+            <label id="lblpassword" style="color:red;visibility:hidden;">Invalid</label><br>
+            <input type="password" placeholder="Retype Password" id="rpassword" required/><br><br>
+
+                        
+            <label id="lblrpassword" style="color:red;visibility:hidden;">Invalid</label><br>
+<input type="radio" id="male" name="gender" value="male">
+  <label for="male">Male</label><br><br>
+  <input type="radio" id="female" name="gender" value="female">
+  <label for="female">Female</label><br><br>
+
+            <button type="submit" name="signup-button">Submit</button>
+        
+        </div>
+        <div class="right-box">
+          <span class="signinwith">Sign in with<br/>Social Network     </span>
+        
+        <button class="social facebook">Log in with Facebook</button>    
+        <button class="social twitter">Log in with Twitter</button> 
+        <button class="social google">Log in with Google+</button> 
+            
+        
+        </div>
+        <div class="or">OR</div>
+    </div>
+    
+</body>    
+</html>
